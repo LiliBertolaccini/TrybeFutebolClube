@@ -4,6 +4,8 @@ import db from '.';
 
 class Example extends Model {
   // declare <campo>: <tipo>;
+  declare id: number;
+  // declare team_name: string;
 }
 
 Example.init({
