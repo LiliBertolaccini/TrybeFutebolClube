@@ -7,7 +7,7 @@ class App {
     this.app = express();
 
     this.config();
-
+    this.rotasTfc();
     // Não remover essa rota
     this.app.get('/', (req, res) => res.json({ ok: true }));
   }
@@ -22,6 +22,11 @@ class App {
 
     this.app.use(express.json());
     this.app.use(accessControl);
+  }
+
+  private rotasTfc(): void {
+    // this.app.use();
+    // este é o formato da rota
   }
 
   public start(PORT: string | number):void {
