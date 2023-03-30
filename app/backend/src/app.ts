@@ -24,10 +24,10 @@ class App {
     this.app.use(accessControl);
   }
 
-  private rotasTfc(): void {
-    // this.app.use();
-    // este é o formato da rota
-  }
+  // private rotasTfc(): void {
+  //  // this.app.use();
+  //  // este é o formato da rota
+  // }
 
   public start(PORT: string | number):void {
     this.app.listen(PORT, () => console.log(`Running on port ${PORT}`));
