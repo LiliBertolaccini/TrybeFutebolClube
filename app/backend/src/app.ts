@@ -1,4 +1,5 @@
 import * as express from 'express';
+import teamsRouter from './routers/TeamRouter';
 
 class App {
   public app: express.Express;
@@ -7,7 +8,7 @@ class App {
     this.app = express();
 
     this.config();
-    // this.rotasTfc();
+
     // Não remover essa rota
     this.app.get('/', (req, res) => res.json({ ok: true }));
   }
@@ -22,12 +23,8 @@ class App {
 
     this.app.use(express.json());
     this.app.use(accessControl);
+    this.app.use('/teams', teamsRouter);
   }
-
-  // private rotasTfc(): void {
-  //  // this.app.use();
-  //  // este é o formato da rota
-  // }
 
   public start(PORT: string | number):void {
     this.app.listen(PORT, () => console.log(`Running on port ${PORT}`));
