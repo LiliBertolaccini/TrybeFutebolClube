@@ -8,4 +8,10 @@ export default class TeamController {
     const result = await this.teamService.findAllTeam();
     return res.status(200).json(result);
   };
+
+  public findOneTeam = async (req: Request, res: Response) => {
+    const { id } = req.params;
+    const result = await this.teamService.findOneTeam(Number(id));
+    return res.status(200).json(result);
+  };
 }

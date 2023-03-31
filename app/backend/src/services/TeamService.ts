@@ -9,4 +9,9 @@ export default class TeamService {
     const result = await this.model.findAll();
     return result;
   }
+
+  public async findOneTeam(id: number): Promise<ITeam | null> {
+    const result = await this.model.findOne({ where: { id } });
+    return result;
+  }
 }
