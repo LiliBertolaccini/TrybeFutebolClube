@@ -1,13 +1,22 @@
 import { Response, Request, NextFunction } from 'express';
-import * as jwt from 'jsonwebtoken';
+import { verifyToken } from '../auth/authToken';
+import { IPayload } from '../intefaces/IUser';
 
 const verificaAuthToken = async (req: Request, res: Response, next: NextFunction) => {
-  const token = req.headers.authorization;
-  if (!token) {
-    return res.status(400).json('All fields must be filled');
+  const { authorization } = req.headers;
+
+  if (!authorization) {
+    return res.status(401).json({ message: 'Token not found' });
   }
-  const payload = jwt.verify(token, process.env.JWT_SECRET as string);
-  (req.body.user = payload);
+  if (authorization.length < 16) {
+    return res.status(401).json({ message: 'Token must be a valid token' });
+  }
+  const payload = verifyToken(authorization) as unknown as IPayload;
+  req.body.role = payload.payload.role;
+
+  if (!payload) {
+    return res.status(401).json({ message: 'Token must be a valid token' });
+  }
   next();
 };
 

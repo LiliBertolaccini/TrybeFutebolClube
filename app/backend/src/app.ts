@@ -26,6 +26,7 @@ class App {
     this.app.use(accessControl);
     this.app.use('/teams', teamsRouter);
     this.app.use('/login', userRouter);
+    this.app.use('/role', userRouter);
   }
 
   public start(PORT: string | number):void {
