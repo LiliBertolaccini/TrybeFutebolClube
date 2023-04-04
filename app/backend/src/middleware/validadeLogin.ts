@@ -1,8 +1,6 @@
 import { Response, Request, NextFunction } from 'express';
-// import { ITeam } from 'src/intefaces/ITeam';
 
-// const { name, username, role, email, password }
-// const veficaEmail = async (req: Request, res: Response, next: NextFunction) => {
+// const verificaEmail = async (req: Request, res: Response, next: NextFunction) => {
 //  const { email } = req.body;
 
 //  if (!email) {
@@ -11,11 +9,17 @@ import { Response, Request, NextFunction } from 'express';
 //  next();
 // };
 
-// const veficaPassword = async (req: Request, res: Response, next: NextFunction) => {
+// const verificaPassword = async (req: Request, res: Response, next: NextFunction) => {
 //  const { password } = req.body;
 
 //  if (!password) {
 //    return res.status(400).json({ message: 'All fields must be filled' });
+//  }
+//  if (typeof password !== 'string') {
+//    return res.status(401).json({ message: '"password" must be a string' });
+//  }
+//  if (password.length < 6) {
+//    return res.status(401).json({ message: '"password" length must be at least 6 characters long' });
 //  }
 //  next();
 // };
@@ -25,11 +29,18 @@ const verificaLogin = async (req: Request, res: Response, next: NextFunction) =>
   if (!email || !password) {
     return res.status(400).json({ message: 'All fields must be filled' });
   }
+  if (password.length < 6) {
+    return res.status(401).json({ message: 'Invalid email or password' });
+  }
+  const regex = /\S+@\S+\.\S+/;
+  if (!regex.test(email)) {
+    return res.status(401).json({ message: 'Invalid email or password' });
+  }
   next();
 };
 
 export default {
-  // veficaEmail,
-  // veficaPassword,
+  // verificaEmail,
+  // verificaPassword,
   verificaLogin,
 };
