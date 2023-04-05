@@ -13,4 +13,10 @@ export default class MatchController {
     const progress = await this.matchService.findInProgress(inProgress === 'true');
     return res.status(200).json(progress);
   };
+
+  public finishMatch = async (req: Request, res: Response) => {
+    const { id } = req.params;
+    await this.matchService.finishMatch(Number(id));
+    return res.status(200).json({ message: 'Finished' });
+  };
 }

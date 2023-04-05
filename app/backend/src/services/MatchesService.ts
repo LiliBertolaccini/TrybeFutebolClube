@@ -25,4 +25,12 @@ export default class MatchService {
     });
     return result;
   }
+
+  public async finishMatch(id: number) {
+    const result = await this.model.update(
+      { inProgress: false },
+      { where: { id } },
+    );
+    return result;
+  }
 }
