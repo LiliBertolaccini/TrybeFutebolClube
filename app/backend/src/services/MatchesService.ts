@@ -33,4 +33,12 @@ export default class MatchService {
     );
     return result;
   }
+
+  public async updateMatchInProgress(id: number, homeTeamGoals: number, awayTeamGoals: number) {
+    const result = await this.model.update(
+      { homeTeamGoals, awayTeamGoals },
+      { where: { id } },
+    );
+    return result;
+  }
 }
