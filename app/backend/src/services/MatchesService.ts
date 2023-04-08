@@ -41,4 +41,24 @@ export default class MatchService {
     );
     return result;
   }
+
+  public async findIdMatch(id: number) {
+    const result = await this.model.findByPk(id);
+    return result;
+  }
+
+  public async createMatch(
+    homeTeamId: number,
+    homeTeamGoals: number,
+    awayTeamId: number,
+    awayTeamGoals: number,
+  ) {
+    const { id } = await this.model.create({
+      homeTeamId,
+      homeTeamGoals,
+      awayTeamId,
+      awayTeamGoals,
+      inProgress: true });
+    return { id, homeTeamId, homeTeamGoals, awayTeamId, awayTeamGoals, inProgress: true };
+  }
 }

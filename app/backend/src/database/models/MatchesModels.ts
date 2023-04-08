@@ -1,9 +1,8 @@
-import { DataTypes, InferAttributes, Model } from 'sequelize';
+import { DataTypes, Model } from 'sequelize';
 import database from './index';
 import Team from './TeamModel';
-// import Team from './teamsModel';
 
-export default class Match extends Model<InferAttributes<Match>> {
+export default class Match extends Model {
   declare id: number;
   declare homeTeamId: number;
   declare homeTeamGoals: number;
