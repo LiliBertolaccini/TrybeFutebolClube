@@ -1,3 +1,4 @@
+export const mockMatches = 
 [
   {
     "id": 1,
@@ -673,7 +674,7 @@
   }
 ]
 
-const timao = {
+export const timao = {
   "id": 46,
   "homeTeamId": 4,
   "awayTeamId": 12,
