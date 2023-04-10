@@ -1,8 +1,12 @@
 import { Request, Response } from 'express';
 import MatchService from '../services/MatchesService';
+import TeamService from '../services/TeamService';
 
 export default class MatchController {
-  constructor(private matchService = new MatchService()) {}
+  constructor(
+    private matchService = new MatchService(),
+    private teamService = new TeamService(),
+  ) {}
 
   public findAllMatch = async (req: Request, res: Response) => {
     const { inProgress } = req.query;
@@ -35,9 +39,9 @@ export default class MatchController {
         { message: 'It is not possible to create a match with two equal teams' },
       );
     }
-    const homeTeam = await this.matchService.findIdMatch(homeTeamId);
-    const awayTeam = await this.matchService.findIdMatch(awayTeamId);
-    if (!homeTeam && !awayTeam) {
+    const homeTeam = await this.teamService.findOneTeam(homeTeamId);
+    const awayTeam = await this.teamService.findOneTeam(awayTeamId);
+    if (!homeTeam || !awayTeam) {
       return res.status(404)
         .json({ message: 'There is no team with such id!' });
     }
